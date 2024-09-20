@@ -11,7 +11,6 @@ module.exports.index = async (req, res) => {
     }
 
     const tasks = await taskModel.find(find)
-    
     res.json(tasks)
 };
 
