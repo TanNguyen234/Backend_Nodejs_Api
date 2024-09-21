@@ -91,6 +91,7 @@ module.exports.changeMulti = async (req, res) => {
                     code: 200,//success
                     message: `Cập nhật ${key} thành công`
                 })
+
                 break;
             default:
                 res.json({
@@ -107,3 +108,22 @@ module.exports.changeMulti = async (req, res) => {
         })
     }
 };
+
+//[GET] /api/v1/tasks/create
+module.exports.create = async (req, res) => {
+    try {
+        const task = new Task(req.body)
+        const data = await task.save()
+
+        res.json({
+            code: 200,//success
+            message: "Thêm mới thành công",
+            data: data
+        })
+    } catch (err) {
+        res.json({
+            code: 400,//fail
+            message: "Lỗi!"
+        })
+    }
+}
