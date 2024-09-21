@@ -89,10 +89,22 @@ module.exports.changeMulti = async (req, res) => {
                 })
                 res.json({
                     code: 200,//success
-                    message: `Cập nhật ${key} thành công`
+                    message: `Cập nhật thành công`
                 })
 
                 break;
+            case "delete":
+                await Task.updateMany({
+                    _id: { $in: ids }
+                },{
+                    deleted: true,
+                    deleteAt: new Date()
+                })
+
+                res.json({
+                    code: 200,//success
+                    message: `Xóa thành công`
+                })
             default:
                 res.json({
                     code: 400,//fail
@@ -119,6 +131,51 @@ module.exports.create = async (req, res) => {
             code: 200,//success
             message: "Thêm mới thành công",
             data: data
+        })
+    } catch (err) {
+        res.json({
+            code: 400,//fail
+            message: "Lỗi!"
+        })
+    }
+}
+
+//[PATCH] /api/v1/tasks/edit/:id
+module.exports.edit = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        await Task.updateOne({
+            _id: id
+        }, req.body)
+
+        res.json({
+            code: 200,//success
+            message: "Cập nhật thành công",
+        })
+    } catch (err) {
+        res.json({
+            code: 400,//fail
+            message: "Lỗi!"
+        })
+    }
+}
+
+//[DELETE] /api/v1/tasks/delete/:id
+module.exports.delete = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        await Task.updateOne({
+            _id: id
+        }, {
+            deleted: true,
+            deleteAt: new Date()
+        })
+
+        res.json({
+            code: 200,//success
+            message: "Xóa thành công",
         })
     } catch (err) {
         res.json({

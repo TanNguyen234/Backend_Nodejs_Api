@@ -13,4 +13,8 @@ router.patch("/change-multi", controller.changeMulti);//Nếu đúng route là "
 
 router.post("/create", controller.create);//Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
 
+router.patch("/edit/:id", controller.edit);//Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
+
+router.delete("/delete/:id", controller.delete);//Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
+
 module.exports = router;//export hàm router
