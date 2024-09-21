@@ -9,4 +9,6 @@ router.get("/detail/:id", controller.detail);//Nếu đúng route là "/" thì s
 
 router.patch("/change-status/:id", controller.changeStatus);//Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
 
+router.patch("/change-multi", controller.changeMulti);//Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
+
 module.exports = router;//export hàm router
