@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 require('dotenv').config()//Cấu hình file env
 const database = require('./config/database');
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 // parse application/json
 app.use(bodyParser.json())
+app.use(cookieParser())
 
 route(app)
 
