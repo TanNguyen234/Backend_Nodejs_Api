@@ -101,7 +101,7 @@ module.exports.forgotPassword = async (req, res) => {
     otp: otp,
     expireAt: Date.now() + timeExpire * 60
   }
-  
+
   await ForgotPassword.deleteMany({
     email: email
   })
@@ -121,4 +121,29 @@ module.exports.forgotPassword = async (req, res) => {
       code: 200,
       message: "Mã OTP đã được gửi về email của bạn"
   })
+}
+//[POST] /api/v1/users/password/otp
+module.exports.otpPassword = async (req, res) => {
+  const otp = await ForgotPassword.findOne({
+    email: req.body.email,
+    otp: req.body.otp
+  })
+
+  if(otp) {
+    const user = await User.findOne({
+      email: req.body.email,
+      deleted: false,
+    })
+
+    res.json({
+      code: 200,
+      message: "Mã OTP hợp lệ",
+      token: user.token
+    })
+  } else {
+    res.json({
+      code: 400,
+      message: "Mã OTP không hợp lệ"
+    })
+  }
 }
