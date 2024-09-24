@@ -173,3 +173,24 @@ module.exports.resetPassword = async (req, res) => {
     message: "Đặt mật mới khẩu thành công"
   })
 }
+
+//[GET] /api/v1/users/detail
+module.exports.detail = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      token: req.cookies.token,
+      deleted: false,
+    }).select("-password -token")
+
+    res.json({
+      code: 200,
+      message: "Thành công",
+      info: user
+    })
+  } catch (err) {
+    res.json({
+      code: 400,
+      message: "Token không hợp lệ",
+    })
+  }
+}
