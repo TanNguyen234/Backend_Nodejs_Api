@@ -19,6 +19,7 @@ module.exports.register = async (req, res) => {
       fullName: fullName,
       email: email,
       password: password,
+      token: generate.generateRandomString(20)
     });
 
     await user.save();
@@ -99,7 +100,7 @@ module.exports.forgotPassword = async (req, res) => {
   const objectForgotPassword = {
     email: email,
     otp: otp,
-    expireAt: Date.now() + timeExpire * 60
+    expireAt: Date.now() + timeExpire * 60 * 1000 //Trong mongoose tính là giây nhưng hàm date.now() trả về ml giây nên nhân thêm 1000
   }
 
   await ForgotPassword.deleteMany({

@@ -1,15 +1,11 @@
 //File thiết lập schema của product
 const mongoose = require("mongoose");
-const generate = require('../../../helpers/generate')
 
 const usersSchema = new mongoose.Schema({//Thiết lập schema
   fullName: String,
   email: String,
   password: String,
-  token: {
-    type: String,
-    default: generate.generateRandomString(20)
-  },
+  token: String,  
   phone: String,
   avatar: String,
   deleted: {
