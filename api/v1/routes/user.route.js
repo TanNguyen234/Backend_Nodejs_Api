@@ -17,4 +17,6 @@ router.post("/password/reset", controller.resetPassword);//Nếu đúng route l�
 
 router.get("/detail", authMiddleware.requestAuth, controller.detail);//Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
 
+router.get("/list", authMiddleware.requestAuth, controller.list);//Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
+
 module.exports = router;//export hàm router
