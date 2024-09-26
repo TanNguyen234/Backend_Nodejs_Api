@@ -9,6 +9,7 @@ const taskSchema = new mongoose.Schema({//Thiết lập schema
   timeFinish: Date,
   createdBy: String,
   listUser: Array,
+  taskParentId: String,
   deleted: {
     type: Boolean,
     default: false
